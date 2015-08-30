@@ -29,6 +29,8 @@ public class MailboxScout implements Runnable {
 			};
 
 			String container = new String(msg.getData());
+
+			container = container.trim();
 	
 			if (container.substring(0, container.indexOf(' ')).equals("vfd"))
 

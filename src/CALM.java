@@ -12,7 +12,7 @@ import java.awt.event.*;
 public class CALM extends JFrame {
 
 	public static CALM box;
-	private Mailbox mailbox = new Mailbox();
+	private Mailbox mailbox;
 	private JFrame optionsBox = new JFrame("");
 	private JPanel atlas = new JPanel();
 	private JPanel menoetius = new JPanel();
@@ -53,6 +53,8 @@ public class CALM extends JFrame {
 
 		buildAbox();
 
+		mailbox = new Mailbox();
+
 		messageArea.requestFocus();
 
 	}
@@ -74,6 +76,8 @@ public class CALM extends JFrame {
 			nc = Color.DARK_GRAY;
 
 		menoetius.setBackground(bgc);
+
+		messageArea.requestFocus();
 
 	}
 		
@@ -252,15 +256,7 @@ public class CALM extends JFrame {
 
 		container = "<span style=\"color:DA70D6;\">" + container + "</span>";
 
-		if (messageHistory.equals(""))
-
-			messageHistory += container;
-
-		else
-
-			messageHistory += "<br>" + container;
-
-		history.setText("<span style='color:white;font-size:18;'>" + messageHistory + "</span>");
+		addMessage(container);
 
 	}
 
@@ -590,6 +586,12 @@ public class CALM extends JFrame {
 	public void mailAction(String container) {
 
 		addMessage(container);
+
+	}
+
+	public void mailAction2(String container) {
+
+		addSysMessage(container);
 
 	}
 
