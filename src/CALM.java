@@ -36,7 +36,7 @@ public class CALM extends JFrame {
 	private JScrollPane historyScroll = new JScrollPane(historyContainer);
 	private JScrollPane messageContainer = new JScrollPane(messageArea);
 	private Font manaFont = new Font("Serif", Font.PLAIN, 18);
-	private String messageHistory = "", name = "anon"; 
+	private String messageHistory = "", name = "anon", oldName = name; 
 	private boolean optionsOpen = false, optionsBuilt = false, sliderMouseDown = false, stick = true;
 	private Color bgc = Color.BLACK, nc = Color.WHITE;
 
@@ -57,6 +57,8 @@ public class CALM extends JFrame {
 
 		messageArea.requestFocus();
 
+		mailAction2("Welcome to Chat Across LAN Messenger!");
+
 	}
 		
 	private void updateOptions() {
@@ -65,8 +67,17 @@ public class CALM extends JFrame {
 
 			name = "anon";
 
-		atlas.setBackground(bgc);
+		if (!name.equals(oldName)) {
 
+			sendSysMessage("[" + oldName + "] is now [" + name + "]");
+
+			oldName = name;
+
+		}
+
+		atlas.setBackground(bgc);
+		menoetius.setBackground(bgc);
+		
 		if (bgc != Color.BLACK)
 
 			nc = bgc;
@@ -74,8 +85,6 @@ public class CALM extends JFrame {
 		else
 
 			nc = Color.DARK_GRAY;
-
-		menoetius.setBackground(bgc);
 
 		messageArea.requestFocus();
 
@@ -272,6 +281,14 @@ public class CALM extends JFrame {
 
 	}
 
+	public void sendSysMessage(String container) {
+
+		if (container.length() != 0)
+
+			mailbox.send("dfv " + container.trim());
+
+	}
+
 	private void addListeners() {
 
 		messageArea.addKeyListener(new KeyAdapter() {
@@ -315,6 +332,8 @@ public class CALM extends JFrame {
 			public void keyPressed(KeyEvent e) {
 
 				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+
+					oldName = name;
 
 					name = nameArea.getText().trim();
 

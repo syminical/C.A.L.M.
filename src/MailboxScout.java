@@ -36,6 +36,10 @@ public class MailboxScout implements Runnable {
 
 				CALM.box.mailAction(container.substring(container.indexOf(' ') + 1, container.length()));
 
+			else if (container.substring(0, container.indexOf(' ')).equals("dfv"))
+
+				CALM.box.mailAction2(container.substring(container.indexOf(' ') + 1, container.length()));
+
 		}
 
 	}
